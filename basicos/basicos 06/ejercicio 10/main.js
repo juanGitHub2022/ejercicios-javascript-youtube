@@ -1,65 +1,36 @@
-function recogerDatos() {
+function recogerDatos(){
 
-    let nombreCliente = document.getElementById("nombre_cliente").value;
-    let telefonoCliente = document.getElementById("telefono_cliente").value;
-    let emailCliente = document.getElementById("email_cliente").value;
+    let form = document.forms["myform"]
 
-    let sabor = '';
+    let nombreCliente = form.nombre_cliente.value;
+    let telefonoCliente = form.telefono_cliente.value;
+    let emailCliente = form.email_cliente.value;
 
-    let saborVainilla = document.getElementById("vainilla");
-    let saborChocolate = document.getElementById("chocolate");
-    let saborMixto = document.getElementById("mixto");
+    let sabor = form.sabor.value;
 
-    if (saborVainilla.checked) {
-        sabor = saborVainilla.value;
-    } else if (saborChocolate.checked) {
-        sabor = saborChocolate.value;
-    } else {
-        sabor = saborMixto.value;
-    }
+    let recipiente = form.recipiente.value
 
-    let recipiente = '';
-    let recipienteCopa = document.getElementById("copa");
-    let recipienteTarrina = document.getElementById("tarrina");
+    let extras = document.getElementsByName("extras[]")
 
-    if(recipienteCopa.checked){
-        recipiente = recipienteCopa.value;
-    }else{
-        recipiente = recipienteTarrina.value;
-    }
+    
 
-    let extras = [];
 
-    let extraCaramelo = document.getElementById("caramelo");
-    let extraKitkat = document.getElementById("kitkat");
-    let extraChocolate = document.getElementById("chocolateExtra");
-
-    if(extraCaramelo.checked){
-        extras.push(extraCaramelo.value);
-    }
-
-    if(extraKitkat.checked){
-        extras.push(extraKitkat.value);
-    }
-
-    if(extraChocolate.checked){
-        extras.push(extraChocolate.value);
-    }
-
-    let mensajeFinal = "El cliente con nombre: "+ nombreCliente+
+    let mensajeFinal = "El cliente con nombre: " + nombreCliente+
                         ", telefono: "+ telefonoCliente+
-                        ", email: "+emailCliente+
-                        " ha elegido un helado con el sabor: "+sabor+
-                        " en un recipiente de " + recipiente+
-                        " con los siguientes extras: ";
+                        ", e-mail: "+ emailCliente+
+                        ", ha elegido helado con el sabor "+ sabor+
+                        ", en un recipiente de: "+recipiente+
+                        "con los siguientes extras: ";
 
-    for (let i = 0; i < extras.length; i++) {
+    for( let i=0; i<extras.length; i++){
         const element = extras[i];
+
+        if(element.checked){
+            mensajeFinal+= element.value + ", ";
+        }
+
         
-        mensajeFinal+= element + " ";
     }
 
     console.log(mensajeFinal);
-    
-
 }
